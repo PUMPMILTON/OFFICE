@@ -165,9 +165,67 @@
 <a href="https://www.facebook.com/profile.php?id=61569624959222"><i class="fab fa-facebook"></i>FACEBOOK</a>
 <a href="https://www.instagram.com/dogturbo.oficial?igsh=OTE0YmkwN2d3YWo="><i class="fab fa-instagram"></i>INSTAGRAM</a>
 <a href="https://t.me/blum/app?startapp=memepadjetton_DOGTB_MstqT-ref_LHAmWKFsZv"><i class="fas fa-shopping-cart"></i>GET 𝘕𝘖𝘞 $MTON</a>
-        <button class="highlighted-btn" id="showContract">
-            <img src="https://i.imgur.com/L3fb6eE.png" alt="Show Contract" style="width: 100%; height: auto;">
-        </button>
+
+        <!-- Carrossel de fotos -->
+<div id="carousel" style="margin-top: 20px; position: relative; width: 100%; overflow: hidden;">
+    <div id="carouselImages" style="display: flex; transition: transform 0.5s ease;">
+        <img src="https://i.imgur.com/e46iNZ2.png" alt="Image 1" style="width: 100%; flex-shrink: 0;">
+        <img src="https://i.imgur.com/5FzPjSx.png" alt="Image 2" style="width: 100%; flex-shrink: 0;">
+        <img src="https://i.imgur.com/VHKICNn.png" alt="Image 3" style="width: 100%; flex-shrink: 0;">
+        <img src="https://i.imgur.com/PmgWkDv.png" alt="Image 4" style="width: 100%; flex-shrink: 0;">
+        <img src="https://i.imgur.com/fgIdYvX.jpeg" alt="Image 5" style="width: 100%; flex-shrink: 0;">
+        <img src="https://i.imgur.com/JjO5Kci.png" alt="Image 6" style="width: 100%; flex-shrink: 0;">
+        <img src="https://i.imgur.com/lvZJYhP.jpeg" alt="Image 7" style="width: 100%; flex-shrink: 0;">
+       
+    </div>
+    <!-- Botões de navegação -->
+    <button id="prevBtn" style="position: absolute; top: 50%; left: 5px; transform: translateY(-50%); background: rgba(0, 0, 0, 0.5); color: white; border: none; padding: 10px; cursor: pointer; z-index: 1;">&#9664;</button>
+    <button id="nextBtn" style="position: absolute; top: 50%; right: 5px; transform: translateY(-50%); background: rgba(0, 0, 0, 0.5); color: white; border: none; padding: 10px; cursor: pointer; z-index: 1;">&#9654;</button>
+</div>
+
+<script>
+    const carouselImages = document.getElementById('carouselImages');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    let currentIndex = 0;
+
+    // Atualiza a posição do carrossel
+    function updateCarousel() {
+        const imageWidth = carouselImages.children[0].clientWidth;
+        carouselImages.style.transform = `translateX(${-currentIndex * imageWidth}px)`;
+    }
+
+    // Botão anterior
+    prevBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex > 0) ? currentIndex - 1 : carouselImages.children.length - 1;
+        updateCarousel();
+    });
+
+    // Botão próximo
+    nextBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex < carouselImages.children.length - 1) ? currentIndex + 1 : 0;
+        updateCarousel();
+    });
+
+    // Rotação automática
+    function autoRotate() {
+        currentIndex = (currentIndex < carouselImages.children.length - 1) ? currentIndex + 1 : 0;
+        updateCarousel();
+    }
+
+    // Define um intervalo de 3 segundos para rotação automática
+    const autoRotateInterval = setInterval(autoRotate, 3000);
+
+    // Ajusta a posição quando a janela é redimensionada
+    window.addEventListener('resize', updateCarousel);
+
+    // Pausar rotação automática ao interagir
+    [prevBtn, nextBtn].forEach(button => {
+        button.addEventListener('mouseover', () => clearInterval(autoRotateInterval));
+        button.addEventListener('mouseout', () => setInterval(autoRotate, 3000));
+    });
+</script>
         
         <button class="highlighted-btn" id="showRoadmap">THE ROADMAP</button>
         <button class="highlighted-btn" id="showMeetMilton">MEET MILTON</button>
